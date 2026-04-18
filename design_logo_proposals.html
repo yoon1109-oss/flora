@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flovers — Logo Proposals</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream:       #FAF6F1;
+    --parchment:   #F3ECE3;
+    --dusty-rose:  #C9A090;
+    --brown:       #6B5044;
+    --warm-gray:   #B8A89E;
+    --border:      #E8DDD5;
+    --gold:        #C8A96E;
+  }
+  body {
+    background: #E2D8CF;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 24px;
+    gap: 20px;
+  }
+  h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #9C7E72;
+    margin-bottom: 12px;
+  }
+
+  /* ── 카드 ── */
+  .proposal {
+    background: var(--cream);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 480px;
+    padding: 36px 40px 28px;
+    box-shadow: 0 8px 32px rgba(107,80,68,.12);
+  }
+  .proposal-number {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+
+  /* ── 로고 디스플레이 영역 ── */
+  .logo-display {
+    background: var(--parchment);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* 앱바 맥락 미리보기 */
+  .appbar-preview {
+    width: 100%;
+    background: var(--cream);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .appbar-icon { font-size: 14px; color: var(--warm-gray); }
+
+  /* ── 시안 1 — F·love·rs (세리프 이탤릭 강조) ── */
+  .logo-1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 2px;
+  }
+  .logo-1 .love {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--dusty-rose);
+    letter-spacing: 1px;
+  }
+
+  /* 앱바 사이즈 */
+  .logo-1-sm {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 2px;
+  }
+  .logo-1-sm .love {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--dusty-rose);
+  }
+
+  /* ── 시안 2 — FLOVERS (올캡스 + LOVE 컬러) ── */
+  .logo-2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+  }
+  .logo-2 .love {
+    color: var(--dusty-rose);
+    font-weight: 600;
+  }
+
+  .logo-2-sm {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+  .logo-2-sm .love {
+    color: var(--dusty-rose);
+    font-weight: 600;
+  }
+
+  /* ── 시안 3 — flovers (소문자 + love 언더라인 + 컬러) ── */
+  .logo-3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 1px;
+  }
+  .logo-3 .love {
+    color: var(--dusty-rose);
+    font-style: italic;
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--dusty-rose);
+    padding-bottom: 1px;
+  }
+
+  .logo-3-sm {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 1px;
+  }
+  .logo-3-sm .love {
+    color: var(--dusty-rose);
+    font-style: italic;
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--dusty-rose);
+    padding-bottom: 1px;
+  }
+
+  /* ── 설명 ── */
+  .desc {
+    font-size: 11px;
+    color: var(--warm-gray);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    line-height: 1.7;
+  }
+  .desc strong {
+    color: var(--brown);
+    font-weight: 400;
+  }
+
+  /* ── 골드 구분선 ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<h1>Flovers — Logo Proposals</h1>
+
+<!-- 시안 1 -->
+<div class="proposal">
+  <div class="proposal-number">No. 1 — Serif Italic Contrast</div>
+  <div class="logo-display">
+    <div class="logo-1">F<span class="love">love</span>rs</div>
+    <div class="divider"><div class="divider-dot"></div></div>
+    <div class="appbar-preview">
+      <span class="appbar-icon">☰</span>
+      <span class="logo-1-sm">F<span class="love">love</span>rs</span>
+      <span class="appbar-icon">·</span>
+    </div>
+  </div>
+  <p class="desc">
+    <strong>F</strong>와 <strong>rs</strong>는 업라이트(정체), <strong>love</strong>는 이탤릭 + 세미볼드 + 더스티 로즈.<br>
+    같은 Playfair Display 안에서 자세만 바꿔 은근한 대비를 만드는 방식.
+  </p>
+</div>
+
+<!-- 시안 2 -->
+<div class="proposal">
+  <div class="proposal-number">No. 2 — All Caps Color Pop</div>
+  <div class="logo-display">
+    <div class="logo-2">F<span class="love">LOVE</span>RS</div>
+    <div class="divider"><div class="divider-dot"></div></div>
+    <div class="appbar-preview">
+      <span class="appbar-icon">☰</span>
+      <span class="logo-2-sm">F<span class="love">LOVE</span>RS</span>
+      <span class="appbar-icon">·</span>
+    </div>
+  </div>
+  <p class="desc">
+    전체 대문자에 넓은 자간. <strong>LOVE</strong>만 더스티 로즈 + 볼드로 팝.<br>
+    브랜드 로고처럼 각인되는 선명한 인상. 모던 럭셔리 플로리스트 느낌.
+  </p>
+</div>
+
+<!-- 시안 3 -->
+<div class="proposal">
+  <div class="proposal-number">No. 3 — Lowercase Underline</div>
+  <div class="logo-display">
+    <div class="logo-3">f<span class="love">love</span>rs</div>
+    <div class="divider"><div class="divider-dot"></div></div>
+    <div class="appbar-preview">
+      <span class="appbar-icon">☰</span>
+      <span class="logo-3-sm">f<span class="love">love</span>rs</span>
+      <span class="appbar-icon">·</span>
+    </div>
+  </div>
+  <p class="desc">
+    전체 소문자로 친근하고 자연스러운 분위기. <strong>love</strong>는 이탤릭 + 더스티 로즈 + 밑줄.<br>
+    프랑스 내추럴 플로리스트 감성에 가장 가까운 손글씨 느낌.
+  </p>
+</div>
+
+</body>
+</html>

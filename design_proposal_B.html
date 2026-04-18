@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=375, maximum-scale=1">
+<title>FLORA — 시안 B : La Campagne</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+KR:wght@300;400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── 컬러 팔레트 ── */
+  :root {
+    --linen:        #F7F1E8;        /* 배경 — 따뜻한 리넨 */
+    --vanilla:      #EDE4D3;        /* 카드 배경 */
+    --terracotta:   #B5715A;        /* 포인트 — 테라코타 */
+    --terracotta-light: #D4A090;    /* 연한 테라코타 */
+    --olive:        #7A8C5E;        /* 올리브 그린 */
+    --olive-light:  #B5C49A;        /* 연한 올리브 */
+    --espresso:     #4A3525;        /* 진한 에스프레소 */
+    --mocha:        #7A5C48;        /* 모카 브라운 */
+    --sand:         #C4AE90;        /* 샌드 */
+    --border:       #DDD0BC;        /* 테두리 */
+    --rust:         #9E5A3A;        /* 러스트 포인트 */
+  }
+
+  body {
+    background: #D6CBBC;
+    font-family: 'DM Sans', 'Noto Serif KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  /* ── 폰 프레임 ── */
+  .phone {
+    width: 375px;
+    background: var(--linen);
+    border-radius: 44px;
+    box-shadow: 0 24px 64px rgba(74,53,37,.3), 0 4px 12px rgba(0,0,0,.1);
+    overflow: hidden;
+    border: 10px solid #2A1F15;
+    position: relative;
+  }
+
+  .phone-notch {
+    width: 120px; height: 30px;
+    background: #2A1F15;
+    border-radius: 0 0 20px 20px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .screen { overflow: hidden; }
+
+  /* ── 앱바 ── */
+  .appbar {
+    background: var(--linen);
+    padding: 10px 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .appbar-left { display: flex; flex-direction: column; gap: 2px; }
+  .appbar-line {
+    height: 1.5px;
+    background: var(--espresso);
+    border-radius: 2px;
+  }
+  .appbar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    letter-spacing: 8px;
+    color: var(--espresso);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .appbar-tagline {
+    font-size: 8px;
+    letter-spacing: 3.5px;
+    color: var(--sand);
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+  .menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .menu-icon span {
+    display: block;
+    height: 1.5px;
+    background: var(--mocha);
+    border-radius: 1px;
+  }
+  .menu-icon span:nth-child(1) { width: 22px; }
+  .menu-icon span:nth-child(2) { width: 16px; }
+  .menu-icon span:nth-child(3) { width: 22px; }
+
+  /* ── 가는 구분선 ── */
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 0;
+    background: var(--linen);
+  }
+  .divider-ornament::before,
+  .divider-ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin: 0 16px;
+  }
+  .ornament-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+  }
+
+  /* ── 히어로 이미지 ── */
+  .hero {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(160deg, #C4956A 0%, #B5715A 50%, #8B4C35 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 텍스처 오버레이 */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,.03) 2px,
+      rgba(255,255,255,.03) 4px
+    );
+  }
+  .hero-emoji {
+    font-size: 90px;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.2));
+    position: relative;
+    z-index: 1;
+  }
+  .hero-bottom-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(to top, var(--linen), transparent);
+  }
+  /* 상단 꽃 번호 표시 */
+  .hero-counter {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: rgba(247,241,232,.8);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: var(--mocha);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    z-index: 2;
+  }
+
+  /* ── 이미지 도트 인디케이터 ── */
+  .image-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 0 8px;
+    background: var(--linen);
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: all .2s;
+  }
+  .dot.active {
+    width: 18px;
+    border-radius: 3px;
+    background: var(--terracotta);
+  }
+
+  /* ── 꽃 정보 헤더 ── */
+  .flower-header {
+    padding: 16px 22px 12px;
+    background: var(--linen);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .flower-name-block {}
+  .flower-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--espresso);
+    line-height: 1.1;
+  }
+  .flower-name em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .flower-latin {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--sand);
+    margin-top: 2px;
+  }
+  .flower-season-chip {
+    background: var(--olive-light);
+    color: var(--olive);
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  /* ── 꽃말 배너 ── */
+  .floriography-banner {
+    margin: 0 22px 16px;
+    padding: 12px 16px;
+    background: var(--vanilla);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .floriography-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .floriography-content {}
+  .floriography-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    margin-bottom: 2px;
+  }
+  .floriography-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--terracotta);
+    font-style: italic;
+  }
+
+  /* ── 섹션 ── */
+  .section {
+    margin: 0 22px 14px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-body {
+    background: var(--vanilla);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 15px 16px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--mocha);
+    font-weight: 300;
+  }
+
+  /* ── 리뷰 섹션 (노트 스타일) ── */
+  .note-card {
+    margin: 0 22px 22px;
+    background: var(--vanilla);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 18px 18px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 노트 줄무늬 */
+  .note-card::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 42px;
+    width: 1px;
+    background: rgba(181,113,90,.15);
+  }
+  .note-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding-left: 28px;
+  }
+  .note-header-icon { font-size: 14px; }
+  .note-header-text {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+  .note-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--mocha);
+    font-style: italic;
+    padding-left: 28px;
+  }
+
+  /* ── 시즌 탐색 ── */
+  .season-section {
+    padding: 0 22px 26px;
+  }
+  .season-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .season-item {
+    background: var(--vanilla);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .season-item.active {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+  .season-emoji { font-size: 20px; display: block; margin-bottom: 4px; }
+  .season-name {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--mocha);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .season-item.active .season-name { color: #fff; }
+
+  /* ── 시안 라벨 ── */
+  .proposal-label {
+    text-align: center;
+    margin-bottom: 12px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .proposal-label h2 {
+    font-size: 22px;
+    color: #3A2618;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .proposal-label p {
+    font-size: 12px;
+    color: #7A5C48;
+    letter-spacing: 1px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .swatch-wrap { position: relative; margin-bottom: 20px; }
+  .swatch {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.14);
+  }
+  .swatch-label {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    color: #888;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<!-- 시안 B -->
+<div>
+  <div class="proposal-label">
+    <h2>시안 B — La Campagne</h2>
+    <p>리넨 · 테라코타 · 올리브 · 모카 / Cormorant Garamond 세리프</p>
+  </div>
+
+  <div class="palette">
+    <div class="swatch-wrap">
+      <div class="swatch" style="background:#F7F1E8"></div>
+      <div class="swatch-label">Linen</div>
+    </div>
+    <div class="swatch-wrap">
+      <div class="swatch" style="background:#B5715A"></div>
+      <div class="swatch-label">Terracotta</div>
+    </div>
+    <div class="swatch-wrap">
+      <div class="swatch" style="background:#7A8C5E"></div>
+      <div class="swatch-label">Olive</div>
+    </div>
+    <div class="swatch-wrap">
+      <div class="swatch" style="background:#C4AE90"></div>
+      <div class="swatch-label">Sand</div>
+    </div>
+    <div class="swatch-wrap">
+      <div class="swatch" style="background:#4A3525"></div>
+      <div class="swatch-label">Espresso</div>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="phone-notch"></div>
+    <div class="screen">
+
+      <!-- 앱바 -->
+      <div class="appbar">
+        <div class="menu-icon">
+          <span></span><span></span><span></span>
+        </div>
+        <div style="text-align:center">
+          <div class="appbar-title">F L O R A</div>
+          <div class="appbar-tagline">Carnet de Fleuriste</div>
+        </div>
+        <div style="font-size:18px; color:var(--mocha)">○</div>
+      </div>
+
+      <!-- 장식 구분선 -->
+      <div class="divider-ornament">
+        <div class="ornament-dot"></div>
+        <div class="ornament-dot"></div>
+        <div class="ornament-dot"></div>
+      </div>
+
+      <!-- 히어로 이미지 -->
+      <div class="hero">
+        <div class="hero-counter">1 / 4</div>
+        <div class="hero-emoji">🌹</div>
+        <div class="hero-bottom-strip"></div>
+      </div>
+
+      <!-- 도트 인디케이터 -->
+      <div class="image-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <!-- 꽃 이름 헤더 -->
+      <div class="flower-header">
+        <div class="flower-name-block">
+          <div class="flower-name">자나<em> 장미</em></div>
+          <div class="flower-latin">Rosa Jana</div>
+        </div>
+        <div class="flower-season-chip">봄 · 여름</div>
+      </div>
+
+      <!-- 꽃말 배너 -->
+      <div class="floriography-banner">
+        <div class="floriography-icon">🌿</div>
+        <div class="floriography-content">
+          <div class="floriography-label">Langage des fleurs</div>
+          <div class="floriography-text">사랑의 기쁨, 열정</div>
+        </div>
+      </div>
+
+      <!-- 특징 섹션 -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Caractéristiques</div>
+          <div class="section-line"></div>
+        </div>
+        <div class="section-body">
+          부드럽고 풍성한 꽃잎이 겹겹이 피어나는 장미로, 우아한 컵 모양이 특징이에요. 색감이 진하고 향기가 좋아요.
+        </div>
+      </div>
+
+      <!-- 노트 리뷰 -->
+      <div class="note-card">
+        <div class="note-header">
+          <span class="note-header-icon">✍️</span>
+          <span class="note-header-text">Note du Fleuriste</span>
+        </div>
+        <div class="note-text">
+          플로리스트가 가장 즐겨 쓰는 장미 중 하나예요. 꽃잎 하나하나에서 느껴지는 풍성함이 어떤 꽃다발에도 품격을 더해준답니다.
+        </div>
+      </div>
+
+      <!-- 시즌 탐색 -->
+      <div class="season-section">
+        <div class="section-header" style="margin-bottom:10px">
+          <div class="section-title">Saisons</div>
+          <div class="section-line"></div>
+        </div>
+        <div class="season-grid">
+          <div class="season-item active">
+            <span class="season-emoji">🌸</span>
+            <span class="season-name">봄</span>
+          </div>
+          <div class="season-item">
+            <span class="season-emoji">☀️</span>
+            <span class="season-name">여름</span>
+          </div>
+          <div class="season-item">
+            <span class="season-emoji">🍂</span>
+            <span class="season-name">가을</span>
+          </div>
+          <div class="season-item">
+            <span class="season-emoji">❄️</span>
+            <span class="season-name">겨울</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /screen -->
+  </div><!-- /phone -->
+</div>
+
+</body>
+</html>

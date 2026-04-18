@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FLORA — Design Proposal A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:              #FAF6F1;
+    --parchment:          #F3ECE3;
+    --dusty-rose:         #C9A090;
+    --dusty-rose-light:   #DFC4B8;
+    --sage:               #8A9E84;
+    --sage-light:         #BDD0B7;
+    --sage-bg:            #EBF2E9;
+    --brown:              #6B5044;
+    --brown-mid:          #8C6E63;
+    --warm-gray:          #B8A89E;
+    --border:             #E8DDD5;
+    --gold:               #C8A96E;
+  }
+
+  body {
+    background: #E2D8CF;
+    font-family: 'Lato', 'Noto Serif KR', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px 16px 48px;
+    gap: 0;
+  }
+
+  /* ── 페이지 헤더 ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #4A3830;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .page-header p {
+    font-size: 12px;
+    color: #9C7E72;
+    letter-spacing: 1.5px;
+    font-weight: 300;
+  }
+
+  /* ── 컬러 스와치 ── */
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .swatch-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .swatch {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 2.5px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.14);
+  }
+  .swatch-name { font-size: 9px; color: #8C7060; font-family: 'Lato', sans-serif; font-weight: 300; }
+
+  /* ── 화면 라벨 ── */
+  .screens-row {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .screen-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .screen-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9C7E72;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── 폰 프레임 ── */
+  .phone {
+    width: 355px;
+    background: var(--cream);
+    border-radius: 44px;
+    box-shadow: 0 24px 64px rgba(107,80,68,.22), 0 4px 12px rgba(0,0,0,.08);
+    overflow: hidden;
+    border: 9px solid #2C2320;
+  }
+  .phone-notch {
+    width: 110px; height: 28px;
+    background: #2C2320;
+    border-radius: 0 0 18px 18px;
+    margin: 0 auto;
+  }
+  .screen { overflow: hidden; }
+
+  /* ── 공통 앱바 ── */
+  .appbar {
+    background: var(--cream);
+    padding: 10px 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .appbar-icon { font-size: 17px; color: var(--brown-mid); cursor: pointer; line-height: 1; }
+  .appbar-center { text-align: center; }
+  .appbar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    letter-spacing: 6px;
+    color: var(--brown);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .appbar-sub {
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  /* ═══════════════════════════════
+     화면 1 — 꽃 상세
+  ═══════════════════════════════ */
+
+  /* 히어로 */
+  .hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, #E8D5C4 0%, #D4B8A5 40%, #C9A090 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-emoji {
+    font-size: 80px;
+    opacity: .65;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,.12));
+  }
+  .hero-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 72px;
+    background: linear-gradient(to top, var(--cream), transparent);
+  }
+  /* 시즌 뱃지 — 영어+한글 */
+  .hero-badge {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(250,246,241,.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 11px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--brown-mid);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+
+  /* 썸네일 */
+  .thumbnails {
+    display: flex;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--cream);
+  }
+  .thumb {
+    width: 50px; height: 50px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #DFC4B8, #C9A090);
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .thumb.active { border: 2px solid var(--dusty-rose); }
+
+  /* 꽃 이름 영역 */
+  .flower-info {
+    padding: 8px 18px 0;
+    background: var(--cream);
+  }
+  .flower-season-chip {
+    display: inline-block;
+    background: var(--sage-bg);
+    color: var(--sage);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+  }
+  .flower-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--brown);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .flower-name-en {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--warm-gray);
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  /* 꽃말 */
+  .floriography {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .flo-line { width: 22px; height: 1px; background: var(--gold); flex-shrink: 0; }
+  .flo-text {
+    font-size: 12px;
+    color: var(--dusty-rose);
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 400;
+    letter-spacing: .5px;
+  }
+
+  /* 정보 카드 */
+  .card {
+    margin: 0 18px 12px;
+    background: var(--parchment);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+  }
+  .card-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    margin-bottom: 9px;
+  }
+  .card-label::before { content: ''; width: 14px; height: 1px; background: var(--gold); }
+  .card-label::after  { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .card-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--brown-mid);
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 300;
+  }
+
+  /* 리뷰 카드 */
+  .review-card {
+    margin: 0 18px 16px;
+    background: var(--parchment);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--dusty-rose);
+    padding: 14px 16px;
+    position: relative;
+  }
+  .review-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    color: var(--dusty-rose-light);
+    line-height: 1;
+    position: absolute;
+    top: 6px; right: 14px;
+    font-style: italic;
+    pointer-events: none;
+  }
+  .review-text {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--brown-mid);
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 300;
+    padding-right: 18px;
+  }
+  .review-by {
+    margin-top: 8px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── 시즌 태그 섹션 ── */
+  .season-section {
+    padding: 0 18px 22px;
+  }
+  .season-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 12px;
+  }
+
+  .season-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .season-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--parchment);
+    cursor: pointer;
+    transition: all .18s ease;
+    font-size: 12px;
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 400;
+    color: var(--brown-mid);
+    letter-spacing: .5px;
+    user-select: none;
+  }
+  .season-tag:hover,
+  .season-tag.active {
+    background: var(--dusty-rose);
+    border-color: var(--dusty-rose);
+    color: #fff;
+  }
+
+  /* ═══════════════════════════════
+     화면 2 — 시즌 꽃 목록
+  ═══════════════════════════════ */
+
+  /* 시즌 헤더 */
+  .season-header {
+    padding: 16px 18px 12px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+  }
+  .season-header-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 2px;
+  }
+  .season-header-emoji { font-size: 20px; }
+  .season-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--brown);
+  }
+  .season-header-count {
+    font-size: 12px;
+    color: var(--warm-gray);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+  .season-header-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--warm-gray);
+  }
+
+  /* 필터 탭 */
+  .filter-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 10px 18px;
+    background: var(--cream);
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+  .filter-tab {
+    flex-shrink: 0;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    letter-spacing: .3px;
+    border: 1px solid var(--border);
+    background: var(--parchment);
+    color: var(--brown-mid);
+  }
+  .filter-tab.active {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: #fff;
+  }
+
+  /* 꽃 목록 그리드 */
+  .flower-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 14px 18px;
+    background: var(--cream);
+    overflow-y: auto;
+    max-height: 420px;
+  }
+  .flower-card {
+    background: var(--parchment);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .flower-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    background: linear-gradient(135deg, #EDE0D4, #DFC4B8);
+  }
+  .flower-card-body {
+    padding: 9px 10px 10px;
+  }
+  .flower-card-name {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--brown);
+    margin-bottom: 2px;
+  }
+  .flower-card-flo {
+    font-size: 10px;
+    color: var(--dusty-rose);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: .3px;
+  }
+  /* 꽃 카드 이미지 색상 변주 */
+  .fc-blue  { background: linear-gradient(135deg, #D4DCE8, #B8C8DC) !important; }
+  .fc-peach { background: linear-gradient(135deg, #F0DDD0, #E0C0A8) !important; }
+  .fc-green { background: linear-gradient(135deg, #D4E4D0, #B8D0B4) !important; }
+  .fc-lilac { background: linear-gradient(135deg, #E0D4EC, #C8B8DC) !important; }
+</style>
+</head>
+<body>
+
+<!-- 페이지 헤더 -->
+<div class="page-header">
+  <h1>FLORA — Design Proposal A</h1>
+  <p>Cream · Dusty Rose · Sage · Gold &nbsp;/&nbsp; Playfair Display</p>
+</div>
+
+<!-- 컬러 팔레트 -->
+<div class="palette">
+  <div class="swatch-wrap">
+    <div class="swatch" style="background:#FAF6F1"></div>
+    <div class="swatch-name">Cream</div>
+  </div>
+  <div class="swatch-wrap">
+    <div class="swatch" style="background:#C9A090"></div>
+    <div class="swatch-name">Dusty Rose</div>
+  </div>
+  <div class="swatch-wrap">
+    <div class="swatch" style="background:#8A9E84"></div>
+    <div class="swatch-name">Sage</div>
+  </div>
+  <div class="swatch-wrap">
+    <div class="swatch" style="background:#C8A96E"></div>
+    <div class="swatch-name">Gold</div>
+  </div>
+  <div class="swatch-wrap">
+    <div class="swatch" style="background:#6B5044"></div>
+    <div class="swatch-name">Brown</div>
+  </div>
+</div>
+
+<!-- 두 화면 나란히 -->
+<div class="screens-row">
+
+  <!-- 화면 1: 꽃 상세 -->
+  <div class="screen-wrap">
+    <div class="screen-label">꽃 상세 화면</div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="screen">
+
+        <!-- 앱바 -->
+        <div class="appbar">
+          <span class="appbar-icon">☰</span>
+          <div class="appbar-center">
+            <div class="appbar-title">FLORA</div>
+            <div class="appbar-sub">Florist's Guide</div>
+          </div>
+          <span class="appbar-icon">🔍</span>
+        </div>
+
+        <!-- 히어로 -->
+        <div class="hero">
+          <div class="hero-emoji">🌹</div>
+          <div class="hero-overlay"></div>
+        </div>
+
+        <!-- 썸네일 -->
+        <div class="thumbnails">
+          <div class="thumb active">🌹</div>
+          <div class="thumb">🌸</div>
+          <div class="thumb">🌺</div>
+          <div class="thumb">💐</div>
+        </div>
+
+        <!-- 꽃 정보 -->
+        <div class="flower-info">
+          <div class="flower-name">자나 장미</div>
+          <div class="flower-name-en">Jana Rose</div>
+          <div class="floriography">
+            <div class="flo-line"></div>
+            <div class="flo-text">사랑의 기쁨, 열정</div>
+            <div class="flo-line"></div>
+          </div>
+        </div>
+
+        <!-- 특징 카드 -->
+        <div class="card">
+          <div class="card-label">Characteristics</div>
+          <div class="card-text">부드럽고 풍성한 꽃잎이 겹겹이 피어나는 장미로, 우아한 컵 모양이 특징이에요.</div>
+        </div>
+
+        <!-- 리뷰 카드 -->
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-text">플로리스트가 가장 즐겨 쓰는 장미 중 하나예요. 꽃잎 하나하나에서 느껴지는 풍성함이 어떤 꽃다발에도 품격을 더해준답니다.</div>
+          <div class="review-by">— Florist's Note</div>
+        </div>
+
+        <!-- 시즌 태그 -->
+        <div class="season-section">
+          <div class="season-divider"></div>
+          <div class="season-tags">
+            <div class="season-tag active">#봄</div>
+            <div class="season-tag">#여름</div>
+            <div class="season-tag">#가을</div>
+            <div class="season-tag">#겨울</div>
+          </div>
+        </div>
+
+      </div><!-- /screen -->
+    </div><!-- /phone -->
+  </div><!-- /screen-wrap -->
+
+  <!-- 화면 2: 시즌 꽃 목록 -->
+  <div class="screen-wrap">
+    <div class="screen-label">시즌 꽃 목록 화면 (태그 클릭 후)</div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="screen">
+
+        <!-- 앱바 (뒤로가기 포함) -->
+        <div class="appbar">
+          <span class="appbar-icon">‹</span>
+          <div class="appbar-center">
+            <div class="appbar-title">FLORA</div>
+            <div class="appbar-sub">Florist's Guide</div>
+          </div>
+          <span class="appbar-icon" style="opacity:0">·</span>
+        </div>
+
+        <!-- 시즌 헤더 -->
+        <div class="season-header">
+          <div class="season-header-row">
+            <span class="season-header-emoji">🌸</span>
+            <span class="season-header-title">봄 꽃</span>
+            <span class="season-header-count">32종</span>
+          </div>
+          <div class="season-header-sub">Spring Flowers</div>
+        </div>
+
+        <!-- 필터 탭 -->
+        <div class="filter-tabs">
+          <div class="filter-tab active">전체</div>
+          <div class="filter-tab">장미</div>
+          <div class="filter-tab">들꽃</div>
+          <div class="filter-tab">그린</div>
+          <div class="filter-tab">알뿌리</div>
+        </div>
+
+        <!-- 꽃 그리드 -->
+        <div class="flower-grid">
+          <div class="flower-card">
+            <div class="flower-card-img">🌹</div>
+            <div class="flower-card-body">
+              <div class="flower-card-name">자나 장미</div>
+              <div class="flower-card-flo">사랑의 기쁨</div>
+            </div>
+          </div>
+          <div class="flower-card">
+            <div class="flower-card-img fc-blue">💐</div>
+            <div class="flower-card-body">
+              <div class="flower-card-name">아네모네</div>
+              <div class="flower-card-flo">기대, 기다림</div>
+            </div>
+          </div>
+          <div class="flower-card">
+            <div class="flower-card-img fc-peach">🌺</div>
+            <div class="flower-card-body">
+              <div class="flower-card-name">튤립</div>
+              <div class="flower-card-flo">사랑의 고백</div>
+            </div>
+          </div>
+          <div class="flower-card">
+            <div class="flower-card-img fc-green">🌿</div>
+            <div class="flower-card-body">
+              <div class="flower-card-name">미모사</div>
+              <div class="flower-card-flo">부끄러움</div>
+            </div>
+          </div>
+          <div class="flower-card">
+            <div class="flower-card-img fc-lilac">🌸</div>
+            <div class="flower-card-body">
+              <div class="flower-card-name">라일락</div>
+              <div class="flower-card-flo">첫사랑</div>
+            </div>
+          </div>
+          <div class="flower-card">
+            <div class="flower-card-img">🌼</div>
+            <div class="flower-card-body">
+              <div class="flower-card-name">프리지아</div>
+              <div class="flower-card-flo">순결, 청결</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /screen -->
+    </div><!-- /phone -->
+  </div><!-- /screen-wrap -->
+
+</div><!-- /screens-row -->
+
+<script>
+  // 시즌 태그 클릭 인터랙션 (같은 화면 내 미리보기 용)
+  document.querySelectorAll('.season-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      document.querySelectorAll('.season-tag').forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

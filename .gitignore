@@ -1,0 +1,30 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+*.iml
+
+# DB files
+*.db
+flora_b64.txt
+
+# Admin tools (local only)
+gen_admin.js
+admin_data.json
+
+# Claude / bkit / omc tooling
+.bkit/
+.omc/
+.claude/
+.metadata
+
+# CSV (raw data files)
+flora_꽃목록_사진여부.csv
+
+# Screenshots
+emulator_screenshot.png
+screen_now.png
+screen_updated.png
+screenshot*.png

@@ -1,0 +1,77 @@
+{
+  "version": "3.0",
+  "lastUpdated": "2026-04-18T11:16:26.851Z",
+  "activeFeatures": [
+    "api",
+    "flora"
+  ],
+  "primaryFeature": "api",
+  "features": {
+    "api": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-17T10:18:11.623Z",
+        "lastUpdated": "2026-04-17T10:18:11.623Z"
+      },
+      "lastFile": "C:\\Users\\User\\Documents\\gift-tax-news\\api\\news.js"
+    },
+    "flora": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-18T11:16:26.849Z",
+        "lastUpdated": "2026-04-18T11:16:26.849Z"
+      },
+      "lastFile": "C:\\Users\\User\\Documents\\flora\\gen_admin.js"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-04-17T10:11:29.176Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-04-18T11:16:26.851Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-04-17T10:18:11.626Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-18T11:16:26.851Z",
+      "feature": "flora",
+      "phase": "do",
+      "action": "updated"
+    }
+  ],
+  "stateMachine": {
+    "defaultWorkflow": "default",
+    "activeWorkflows": {},
+    "totalTransitions": 0
+  },
+  "automation": {
+    "globalLevel": 2,
+    "trustScore": 40,
+    "pendingApprovals": 0,
+    "lastGateResult": null
+  },
+  "team": {
+    "enabled": true,
+    "stateFile": ".bkit/runtime/agent-state.json",
+    "eventsFile": ".bkit/runtime/agent-events.jsonl"
+  }
+}

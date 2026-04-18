@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mcp-registry__search_mcp_registry",
+      "WebSearch",
+      "Bash(npm i:*)",
+      "Bash(where node:*)",
+      "Bash(cmd.exe /c \"where npm 2>&1 & where node 2>&1 & node --version 2>&1 & npm --version 2>&1\")",
+      "Bash(cmd.exe /c \"node --version & npm --version\")",
+      "Bash(powershell.exe -Command \"node --version; npm --version\")",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx --yes vercel --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git push:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(python -c ':*)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(node -e ':*)",
+      "Bash(cmd /c \"start \\\\\"\\\\\" \\\\\"C:/Users/User/Documents/flora\\\\\"\")",
+      "Bash(cmd /c \"start \\\\\"\\\\\" \\\\\"C:/Program Files/Android/Android Studio/bin/studio64.exe\\\\\" \\\\\"C:/Users/User/Documents/flora\\\\\"\")",
+      "Bash(cmd /c \"start \\\\\"\\\\\" \\\\\"%LOCALAPPDATA%/Programs/Android Studio/bin/studio64.exe\\\\\" \\\\\"C:/Users/User/Documents/flora\\\\\"\")",
+      "Bash(cmd /c start \"\" \"C:\\\\Program Files\\\\Android\\\\Android Studio\\\\bin\\\\studio64.exe\" \"C:\\\\Users\\\\User\\\\Documents\\\\flora\")",
+      "Bash(cmd /c \"start \\\\\"\\\\\" \\\\\"C:/Users/User/Documents/flora/admin.html\\\\\"\")",
+      "Bash(node C:/Users/User/Documents/flora/gen_admin.js)",
+      "Bash(gh auth:*)"
+    ]
+  }
+}
